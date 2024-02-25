@@ -8,7 +8,8 @@ const moreButton = document.querySelector('.load-more');
 
 let currentPage = 1;
 let previousValue;
-let limit;
+let limit = null;
+let loadedImages = 0;
 
 moreButton.classList.add('hidden');
 
@@ -19,17 +20,39 @@ async function onSubmit(event) {
   moreButton.classList.add('hidden');
 
   if (input.value === previousValue) {
-    currentPage++;
-    limit -= 40;
-    console.log(limit);
+    loadMore();
   } else {
+    await getPictures();
     gallery.innerHTML = '';
     currentPage = 1;
-    limit = 500;
+    loadedImages = 0;
   }
-
   await getPictures(currentPage);
   previousValue = input.value;
+
+  if (
+    previousValue !== undefined &&
+    input.value !== previousValue &&
+    limit !== null
+  ) {
+    Notiflix.Notify.success(`Hooray! We found ${limit} images.`);
+  }
+  console;
+
+  // if (input.value !== previousValue) {
+  //   gallery.innerHTML = '';
+  //   currentPage = 1;
+  //   totalImagesLoaded = 0;
+
+  //   await getPictures(currentPage);
+  //   Notiflix.Notify.success(`Hooray! We found ${limit} images.`);
+  //   console.log(limit);
+  // } else {
+  //   await getPictures(currentPage);
+  //   console.log(limit);
+  // }
+
+  // previousValue = input.value;
 }
 
 async function getPictures(currentPage) {
@@ -49,9 +72,14 @@ async function getPictures(currentPage) {
     const pictures = response.data.hits;
     showPictures(pictures);
 
-    if (!limit) {
+    if (currentPage === 1) {
       limit = response.data.totalHits;
+      loadedImages = 40;
     }
+
+    // if (!limit) {
+    // limit = response.data.totalHits;
+    // }
   } catch {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
@@ -93,15 +121,19 @@ async function loadMore() {
     currentPage++;
     await getPictures(currentPage);
 
+    loadedImages += 40;
+    limit = Math.max(limit - loadedImages, 0);
+
     if (limit <= 0) {
       moreButton.classList.add('hidden');
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
-    } else {
-      limit -= 40;
-      console.log(limit);
     }
+    // else {
+    //   limit -= 40;
+    //   console.log(limit);
+    // }
   } catch {
     Notiflix.Notify.failure('Failed to load more photos');
   }
