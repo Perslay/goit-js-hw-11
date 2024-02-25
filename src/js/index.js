@@ -9,7 +9,7 @@ const moreButton = document.querySelector('.load-more');
 let currentPage = 1;
 let previousValue;
 let limit = null;
-let loadedImages = 0;
+let perPage = 0;
 
 moreButton.classList.add('hidden');
 
@@ -25,34 +25,13 @@ async function onSubmit(event) {
     await getPictures();
     gallery.innerHTML = '';
     currentPage = 1;
-    loadedImages = 0;
   }
   await getPictures(currentPage);
   previousValue = input.value;
 
-  if (
-    previousValue !== undefined &&
-    input.value !== previousValue &&
-    limit !== null
-  ) {
-    Notiflix.Notify.success(`Hooray! We found ${limit} images.`);
-  }
-  console;
+  await Notiflix.Notify.success(`Hooray! We found ${limit} images.`);
 
-  // if (input.value !== previousValue) {
-  //   gallery.innerHTML = '';
-  //   currentPage = 1;
-  //   totalImagesLoaded = 0;
-
-  //   await getPictures(currentPage);
-  //   Notiflix.Notify.success(`Hooray! We found ${limit} images.`);
-  //   console.log(limit);
-  // } else {
-  //   await getPictures(currentPage);
-  //   console.log(limit);
-  // }
-
-  // previousValue = input.value;
+  console.log(limit);
 }
 
 async function getPictures(currentPage) {
@@ -74,12 +53,8 @@ async function getPictures(currentPage) {
 
     if (currentPage === 1) {
       limit = response.data.totalHits;
-      loadedImages = 40;
+      perPage = pictures.length;
     }
-
-    // if (!limit) {
-    // limit = response.data.totalHits;
-    // }
   } catch {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
@@ -88,7 +63,6 @@ async function getPictures(currentPage) {
 }
 
 function showPictures(pictures) {
-  // gallery.innerHTML = '';
   pictures.forEach(picture => {
     const markup = `
       <div class="photo-card">
@@ -122,8 +96,7 @@ async function loadMore() {
     currentPage++;
     await getPictures(currentPage);
 
-    loadedImages += 40;
-    limit = Math.max(limit - loadedImages, 0);
+    limit -= perPage;
 
     if (limit <= 0) {
       moreButton.classList.add('hidden');
@@ -131,10 +104,6 @@ async function loadMore() {
         "We're sorry, but you've reached the end of search results."
       );
     }
-    // else {
-    //   limit -= 40;
-    //   console.log(limit);
-    // }
   } catch {
     Notiflix.Notify.failure('Failed to load more photos');
   }
