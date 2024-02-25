@@ -88,6 +88,7 @@ async function getPictures(currentPage) {
 }
 
 function showPictures(pictures) {
+  // gallery.innerHTML = '';
   pictures.forEach(picture => {
     const markup = `
       <div class="photo-card">
