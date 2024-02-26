@@ -1,3 +1,105 @@
+/* google font and modern-normalize */
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import '../node_modules/modern-normalize/modern-normalize.css';
+
+/* main styles */
+
+:root {
+  --color-dark: #111;
+  --color-gray: #333;
+  --color-transparent-gray: #3338;
+  --color-light: #eee;
+  --color-accent: #8c4c9c;
+}
+
+body {
+  background-attachment: fixed;
+  background-color: var(--color-dark);
+  background-image: url('./mikro.png');
+  color: var(--color-light);
+  font-family: 'Work Sans', sans-serif;
+  margin: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+input,
+button {
+  background-color: var(--color-gray);
+  border: none;
+  border-radius: 8px;
+  color: var(--color-light);
+  font-family: 'Work Sans', sans-serif;
+  padding: 0.7em 1em;
+}
+
+button {
+  cursor: pointer;
+  display: block;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
 .hidden {
   display: none;
+}
+
+/* header */
+
+.main-heading {
+  font-size: 36px;
+  letter-spacing: 0.03em;
+  margin: 1em;
+  text-align: center;
+  text-shadow: 2px 2px 3px var(--color-accent);
+  text-transform: uppercase;
+}
+
+/* form */
+
+.search-form {
+  margin: 2rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+  max-width: 100%;
+}
+
+/* .search-input {
+} */
+
+/* .submit-btn {
+} */
+
+/* gallery */
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+}
+
+.photo-card {
+  background-color: var(--color-transparent-gray);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.thumbnail {
+  max-width: 270px;
+}
+
+.info-item {
+  letter-spacing: 0.02em;
+}
+
+/* footer & load more button */
+
+.load-more {
+  margin: 0 auto;
 }

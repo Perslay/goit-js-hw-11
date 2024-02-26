@@ -1,5 +1,7 @@
 import Notiflix from 'notiflix';
 import axios from 'axios';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('#search-form');
 const input = document.querySelector('#search-form input');
@@ -67,7 +69,7 @@ function showPictures(pictures) {
   pictures.forEach(picture => {
     const markup = `
       <div class="photo-card">
-        <img src="${picture.webformatURL}" alt="${picture.tags}" loading="lazy" />
+        <img class="thumbnail" src="${picture.webformatURL}" alt="${picture.tags}" loading="lazy" />
         <div class="info">
           <p class="info-item">
             <b>Likes</b>: ${picture.likes}
