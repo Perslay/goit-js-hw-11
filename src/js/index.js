@@ -8,8 +8,9 @@ const moreButton = document.querySelector('.load-more');
 
 let currentPage = 1;
 let previousValue;
-let limit = null;
+let limit;
 let perPage = 0;
+let newLimit;
 
 moreButton.classList.add('hidden');
 
@@ -22,16 +23,15 @@ async function onSubmit(event) {
   if (input.value === previousValue) {
     loadMore();
   } else {
-    await getPictures();
+    await getPictures(currentPage);
     gallery.innerHTML = '';
     currentPage = 1;
+
+    Notiflix.Notify.success(`Hooray! We found ${newLimit} images.`);
   }
   await getPictures(currentPage);
+
   previousValue = input.value;
-
-  await Notiflix.Notify.success(`Hooray! We found ${limit} images.`);
-
-  console.log(limit);
 }
 
 async function getPictures(currentPage) {
@@ -54,6 +54,7 @@ async function getPictures(currentPage) {
     if (currentPage === 1) {
       limit = response.data.totalHits;
       perPage = pictures.length;
+      newLimit = limit;
     }
   } catch {
     Notiflix.Notify.failure(
@@ -97,6 +98,7 @@ async function loadMore() {
     await getPictures(currentPage);
 
     limit -= perPage;
+    shownImages += perPage;
 
     if (limit <= 0) {
       moreButton.classList.add('hidden');
