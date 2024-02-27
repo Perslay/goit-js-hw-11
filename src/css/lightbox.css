@@ -2,6 +2,10 @@
   background-color: #000c;
 }
 
+.sl-wrapper:focus {
+  outline: none;
+}
+
 .sl-wrapper .sl-counter {
   font-size: 1.5em;
   color: #fff;

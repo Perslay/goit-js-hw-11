@@ -1,7 +1,7 @@
 /* google font and modern-normalize */
 
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-@import '../node_modules/modern-normalize/modern-normalize.css';
+@import '../../node_modules/modern-normalize/modern-normalize.css';
 
 /* main styles */
 
@@ -10,13 +10,13 @@
   --color-gray: #333;
   --color-transparent-gray: #3338;
   --color-light: #eee;
-  --color-accent: #8c4c9c;
+  --color-accent: #9e60ad;
 }
 
 body {
   background-attachment: fixed;
   background-color: var(--color-dark);
-  background-image: url('./mikro.png');
+  background-image: url('../mikro.png');
   color: var(--color-light);
   font-family: 'Work Sans', sans-serif;
   margin: 1em;
@@ -69,8 +69,12 @@ button {
   max-width: 100%;
 }
 
-/* .search-input {
-} */
+.search-input:focus,
+.submit-btn:focus,
+.load-more:focus {
+  box-shadow: 0 0 8px var(--color-accent);
+  outline: none;
+}
 
 /* .submit-btn {
 } */
@@ -89,6 +93,14 @@ button {
   background-color: var(--color-transparent-gray);
   border-radius: 10px;
   padding: 1rem;
+}
+
+.photo-card .link:focus {
+  outline: none;
+}
+
+.link:focus .thumbnail {
+  box-shadow: 0 0 8px var(--color-accent);
 }
 
 .thumbnail {
