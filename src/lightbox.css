@@ -1,0 +1,27 @@
+.sl-wrapper {
+  background-color: #000c;
+}
+
+.sl-wrapper .sl-counter {
+  font-size: 1.5em;
+  color: #fff;
+}
+
+.sl-wrapper > .sl-close,
+.sl-navigation button.sl-prev,
+.sl-navigation button.sl-next {
+  color: #fffa;
+  transition: transform 150ms, color 150ms;
+}
+
+.sl-wrapper .sl-close:focus,
+.sl-wrapper .sl-close:hover,
+.sl-wrapper .sl-prev:focus,
+.sl-wrapper .sl-prev:hover,
+.sl-wrapper .sl-next:focus,
+.sl-wrapper .sl-next:hover {
+  color: #fff;
+  opacity: 1;
+  outline: none;
+  transform: scale(1.6);
+}

@@ -2,6 +2,7 @@ import Notiflix from 'notiflix';
 import axios from 'axios';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import '../lightbox.css';
 
 const form = document.querySelector('#search-form');
 const input = document.querySelector('#search-form input');
@@ -9,10 +10,11 @@ const gallery = document.querySelector('.gallery');
 const moreButton = document.querySelector('.load-more');
 
 let currentPage = 1;
-let previousValue;
+let lightbox;
 let limit;
-let perPage = 0;
 let newLimit;
+let perPage = 0;
+let previousValue;
 
 moreButton.classList.add('hidden');
 
@@ -58,6 +60,18 @@ async function getPictures(currentPage) {
       perPage = pictures.length;
       newLimit = limit;
     }
+
+    // simplelightbox
+
+    if (lightbox) {
+      lightbox.destroy();
+    }
+
+    lightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
+      captionPosition: 'bottom',
+    });
   } catch {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
@@ -69,7 +83,7 @@ function showPictures(pictures) {
   pictures.forEach(picture => {
     const markup = `
       <div class="photo-card">
-        <img class="thumbnail" src="${picture.webformatURL}" alt="${picture.tags}" loading="lazy" />
+        <a href="${picture.largeImageURL}"><img class="thumbnail" src="${picture.webformatURL}" alt="${picture.tags}" loading="lazy" /></a>
         <div class="info">
           <p class="info-item">
             <b>Likes</b>: ${picture.likes}
@@ -100,7 +114,6 @@ async function loadMore() {
     await getPictures(currentPage);
 
     limit -= perPage;
-    shownImages += perPage;
 
     if (limit <= 0) {
       moreButton.classList.add('hidden');

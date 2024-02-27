@@ -82,6 +82,7 @@ button {
   flex-wrap: wrap;
   gap: 1em;
   justify-content: center;
+  margin-bottom: 1em;
 }
 
 .photo-card {
