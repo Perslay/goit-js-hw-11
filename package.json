@@ -11,7 +11,15 @@
     "type": "git",
     "url": "git+https://github.com/goitacademy/parcel-project-template.git"
   },
-  "keywords": [],
+  "keywords": [
+    "JavaScript",
+    "HTML",
+    "CSS",
+    "search",
+    "http requests",
+    "Node.js",
+    "smooth scrolling"
+  ],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "bugs": {
@@ -19,7 +27,6 @@
   },
   "dependencies": {
     "axios": "^1.6.7",
-    "infinite-scroll": "^4.0.1",
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.7",
     "simplelightbox": "^2.14.2"
