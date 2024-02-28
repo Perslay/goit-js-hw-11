@@ -5,7 +5,6 @@ import { simpleLightbox } from './simplelightbox.js';
 const form = document.querySelector('#search-form');
 const input = document.querySelector('#search-form input');
 const gallery = document.querySelector('.gallery');
-const moreButton = document.querySelector('.load-more');
 
 let currentPage = 1;
 let limit;
@@ -13,13 +12,10 @@ let newLimit;
 let perPage = 0;
 let previousValue;
 
-moreButton.classList.add('hidden');
-
 form.addEventListener('submit', onSubmit);
 
 async function onSubmit(event) {
   event.preventDefault();
-  moreButton.classList.add('hidden');
 
   if (input.value === previousValue) {
     loadMore();
@@ -96,11 +92,8 @@ function showPictures(pictures) {
     `;
 
     gallery.insertAdjacentHTML('beforeend', markup);
-    moreButton.classList.remove('hidden');
   });
 }
-
-moreButton.addEventListener('click', loadMore);
 
 async function loadMore() {
   try {
@@ -119,7 +112,6 @@ async function loadMore() {
     });
 
     if (limit <= 0) {
-      moreButton.classList.add('hidden');
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
@@ -128,3 +120,16 @@ async function loadMore() {
     Notiflix.Notify.failure('Failed to load more photos');
   }
 }
+
+window.addEventListener(
+  'scroll',
+  () => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    if (scrollTop + clientHeight >= scrollHeight - 5) {
+      loadMore();
+    }
+  },
+  {
+    passive: true,
+  }
+);

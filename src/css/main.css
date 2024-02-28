@@ -114,11 +114,6 @@ button {
   letter-spacing: 0.02em;
 }
 
-.load-more {
-  margin: 0 auto 1em;
-  transition: box-shadow 200ms;
-}
-
 /* footer */
 
 .footer {
@@ -129,8 +124,7 @@ button {
 /* focus and hover */
 
 .search-input:focus,
-.submit-btn:focus,
-.load-more:focus {
+.submit-btn:focus {
   box-shadow: 0 0 8px var(--color-accent);
   outline: none;
 }
