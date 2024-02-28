@@ -11,15 +11,22 @@
   --color-transparent-gray: #3338;
   --color-light: #eee;
   --color-accent: #9e60ad;
+  --color-accent-dark: #231c25;
 }
 
 body {
+  background-color: var(--color-accent-dark);
+  color: var(--color-light);
+  font-family: 'Work Sans', sans-serif;
+}
+
+.container {
   background-attachment: fixed;
   background-color: var(--color-dark);
   background-image: url('../mikro.png');
-  color: var(--color-light);
-  font-family: 'Work Sans', sans-serif;
-  margin: 1em;
+  margin: 0 auto;
+  max-width: 370px;
+  min-height: 100vh;
 }
 
 img {
@@ -49,44 +56,48 @@ button {
 
 /* header */
 
+.header-container {
+  padding: 0 1em;
+}
+
 .main-heading {
   font-size: 36px;
   letter-spacing: 0.03em;
-  margin: 1em;
+  margin: 0;
+  padding: 1em;
   text-align: center;
   text-shadow: 2px 2px 3px var(--color-accent);
   text-transform: uppercase;
 }
 
-/* form */
+/* main */
+
+.main-container {
+  padding: 0 1em;
+}
 
 .search-form {
-  margin: 2rem auto;
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
   justify-content: center;
+  margin: 0 auto;
   max-width: 100%;
+  padding-bottom: 2rem;
 }
 
-.search-input:focus,
-.submit-btn:focus,
-.load-more:focus {
-  box-shadow: 0 0 8px var(--color-accent);
-  outline: none;
+.search-input,
+.submit-btn,
+.link .thumbnail {
+  transition: box-shadow 250ms;
 }
-
-/* .submit-btn {
-} */
-
-/* gallery */
 
 .gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
   justify-content: center;
-  margin-bottom: 1em;
+  padding-bottom: 1em;
 }
 
 .photo-card {
@@ -95,24 +106,51 @@ button {
   padding: 1rem;
 }
 
-.photo-card .link:focus {
-  outline: none;
-}
-
-.link:focus .thumbnail {
-  box-shadow: 0 0 8px var(--color-accent);
-}
-
 .thumbnail {
-  max-width: 270px;
+  max-width: 250px;
 }
 
 .info-item {
   letter-spacing: 0.02em;
 }
 
-/* footer & load more button */
-
 .load-more {
-  margin: 0 auto;
+  margin: 0 auto 1em;
+  transition: box-shadow 200ms;
+}
+
+/* footer */
+
+.footer {
+  background-color: var(--color-transparent-gray);
+  padding: 1em;
+}
+
+/* focus and hover */
+
+.search-input:focus,
+.submit-btn:focus,
+.load-more:focus {
+  box-shadow: 0 0 8px var(--color-accent);
+  outline: none;
+}
+
+.photo-card .link:focus {
+  outline: none;
+}
+
+.link:focus .thumbnail {
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+@media (min-width: 660px) {
+  .container {
+    max-width: 660px;
+  }
+}
+
+@media (min-width: 1230px) {
+  .container {
+    max-width: 1230px;
+  }
 }

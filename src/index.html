@@ -8,23 +8,37 @@
     <script type="module" src="./js/index.js"></script>
   </head>
   <body>
-    <header>
-      <h1 class="main-heading">Photo Seeker</h1>
-    </header>
-    <main>
-      <form class="search-form" id="search-form">
-        <input
-          class="search-input"
-          type="text"
-          name="searchQuery"
-          autocomplete="off"
-          placeholder="Search images..."
-        />
-        <button class="submit-btn" type="submit">Search</button>
-      </form>
-      <div class="gallery"></div>
-      <button type="button" class="load-more">Load more</button>
-    </main>
-    <footer></footer>
+    <div class="container">
+      <header>
+        <div class="header-container">
+          <h1 class="main-heading">Photo Seeker</h1>
+        </div>
+      </header>
+      <main>
+        <div class="main-container">
+          <form class="search-form" id="search-form">
+            <input
+              class="search-input"
+              type="text"
+              name="searchQuery"
+              autocomplete="off"
+              placeholder="Search images..."
+            />
+            <button class="submit-btn" type="submit">Search</button>
+          </form>
+          <div class="gallery"></div>
+          <button type="button" class="load-more">Load more</button>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="footer-container">
+          <strong>Contact</strong>
+          <address>
+            <p>Natalia Fedyk</p>
+            <p>Warsaw, Poland</p>
+          </address>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

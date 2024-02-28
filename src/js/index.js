@@ -29,6 +29,13 @@ async function onSubmit(event) {
     currentPage = 1;
 
     Notiflix.Notify.success(`Hooray! We found ${newLimit} images.`);
+
+    setTimeout(() => {
+      window.scrollBy({
+        top: 160,
+        behavior: 'smooth',
+      });
+    }, 100);
   }
   await getPictures(currentPage);
 
@@ -101,6 +108,15 @@ async function loadMore() {
     await getPictures(currentPage);
 
     limit -= perPage;
+
+    const { height: cardHeight } = document
+      .querySelector('.gallery')
+      .firstElementChild.getBoundingClientRect('.photo-card');
+
+    window.scrollBy({
+      top: cardHeight,
+      behavior: 'smooth',
+    });
 
     if (limit <= 0) {
       moreButton.classList.add('hidden');
