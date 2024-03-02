@@ -17,10 +17,21 @@ form.addEventListener('submit', onSubmit);
 async function onSubmit(event) {
   event.preventDefault();
 
+  if (input.value.trim('') === '') {
+    Notiflix.Notify.warning('Please fill the field with at least one word');
+    return;
+  }
+
   if (input.value === previousValue) {
     loadMore();
   } else {
     await getPictures(currentPage);
+
+    if (newLimit === 0) {
+      Notiflix.Notify.failure('There are no photos matching your query.');
+      return;
+    }
+
     gallery.innerHTML = '';
     currentPage = 1;
 
@@ -43,7 +54,7 @@ async function getPictures(currentPage) {
     const response = await axios.get('https://pixabay.com/api/', {
       params: {
         key: '42513703-cc305044521a10f5f63ac2280',
-        q: input.value,
+        q: input.value.trim(''),
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
@@ -112,6 +123,7 @@ async function loadMore() {
     });
 
     if (limit <= 0) {
+      window.removeEventListener('scroll', infiniteScroll);
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
@@ -121,15 +133,11 @@ async function loadMore() {
   }
 }
 
-window.addEventListener(
-  'scroll',
-  () => {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-    if (scrollTop + clientHeight >= scrollHeight - 5) {
-      loadMore();
-    }
-  },
-  {
-    passive: true,
+function infiniteScroll() {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  if (scrollTop + clientHeight >= scrollHeight - 5) {
+    loadMore();
   }
-);
+}
+
+window.addEventListener('scroll', infiniteScroll, { passive: true });

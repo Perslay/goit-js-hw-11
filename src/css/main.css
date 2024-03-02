@@ -23,7 +23,7 @@ body {
 .container {
   background-attachment: fixed;
   background-color: var(--color-dark);
-  background-image: url('../mikro.png');
+  background-image: url('../img/mikro.png');
   margin: 0 auto;
   max-width: 370px;
   min-height: 100vh;
